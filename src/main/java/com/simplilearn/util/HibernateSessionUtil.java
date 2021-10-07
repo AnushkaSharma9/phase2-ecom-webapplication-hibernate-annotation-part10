@@ -4,6 +4,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import com.simplilearn.model.Order;
+import com.simplilearn.model.Payment;
 import com.simplilearn.model.Product;
 import com.simplilearn.model.ProductDetails;
 
@@ -16,6 +17,7 @@ public class HibernateSessionUtil {
 				.addAnnotatedClass(Product.class)
 				.addAnnotatedClass(ProductDetails.class)
 				.addAnnotatedClass(Order.class)
+				.addAnnotatedClass(Payment.class)
 				.buildSessionFactory();
 		return factory;
 	}

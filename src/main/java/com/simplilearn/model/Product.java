@@ -1,5 +1,6 @@
 package com.simplilearn.model;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -42,6 +45,11 @@ public class Product {
 	
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private Order order;
+	
+	@ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@JoinTable(name="products_payments", joinColumns=@JoinColumn(name="id"),
+	inverseJoinColumns=@JoinColumn(name="payment_id"))
+	private Set<Payment> payments;
 	
 	public Product() {
 		super();
@@ -117,6 +125,14 @@ public class Product {
 
 	public void setOrder(Order order) {
 		this.order = order;
+	}
+	
+	public Set<Payment> getPayments() {
+		return payments;
+	}
+
+	public void setPayments(Set<Payment> payments) {
+		this.payments = payments;
 	}
 
 	@Override
