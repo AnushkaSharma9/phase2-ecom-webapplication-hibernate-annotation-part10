@@ -1,11 +1,15 @@
 package com.simplilearn.model;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 // This is a encapsulated POJO
@@ -16,7 +20,7 @@ public class Product {
 	// properties
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="product_id")
+	@Column(name="id")
 	private int id;
 	
 	@Column(name="product_name")
@@ -30,6 +34,10 @@ public class Product {
 	
 	@Column(name="modified_at")
 	private Date modifiedAt;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="id")
+	private ProductDetails details;
 	
 	public Product() {
 		super();
@@ -89,6 +97,14 @@ public class Product {
 
 	public void setModifiedAt(Date modifiedAt) {
 		this.modifiedAt = modifiedAt;
+	}
+	
+	public ProductDetails getDetails() {
+		return details;
+	}
+
+	public void setDetails(ProductDetails details) {
+		this.details = details;
 	}
 
 	@Override
